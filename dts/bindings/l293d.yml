@@ -1,0 +1,61 @@
+# Copyright 2024 Jonas Otto
+# SPDX-License-Identifier: Apache-2.0
+
+description: Generic four channel push pull driver
+
+compatible: "l293d"
+
+include: pinctrl-device.yaml
+
+properties:
+  enable1-gpios:
+    type: phandle-array
+    required: true
+    description: Enable input for channel 1
+
+  enable2-gpios:
+    type: phandle-array
+    required: true
+    description: Enable input for channel 2
+
+  in1-gpios:
+    type: phandle-array
+    required: true
+    description: Input 1 (channel 1)
+
+  in2-gpios:
+    type: phandle-array
+    required: true
+    description: Input 2 (channel 1)
+
+  in3-gpios:
+    type: phandle-array
+    required: true
+    description: Input 3 (channel 2)
+
+  in4-gpios:
+    type: phandle-array
+    required: true
+    description: Input 4 (channel 2)
+
+  "#address-cells":
+    type: int
+    description: number of address cells in reg property
+    const: 1
+
+  "#size-cells":
+    type: int
+    description: number of size cells in reg property
+    const: 0
+
+child-binding:
+  description: Motor instance. L293D node can has up to 2 motors under a single L293D.
+
+  properties:
+    reverse:
+      type: boolean
+      description: Reverse motor direction
+
+    reg:
+      type: array
+      description: register space
